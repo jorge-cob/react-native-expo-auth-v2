@@ -1,0 +1,210 @@
+{
+  "root": true,
+  "extends": [
+    "airbnb",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "__DEV__": "readonly",
+    "fetch": false,
+    "window": true,
+    "document": true,
+    "XMLHttpRequest": true,
+    "AbortController": true,
+    "FileReader": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "plugins": ["react"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "fragment": "Fragment",
+      "version": "detect",
+      "flowVersion": "0.53"
+    },
+    "propWrapperFunctions": [
+      "forbidExtraProps",
+      { "property": "freeze", "object": "Object" },
+      { "property": "forbidExtraProps", "exact": true }
+    ],
+    "componentWrapperFunctions": ["observer"],
+    "formComponents": [{ "name": "Form", "formAttribute": "endpoint" }],
+    "linkComponents": ["Hyperlink", { "name": "Link", "linkAttribute": "to" }],
+    "import/resolver": {
+      "babel-module": {},
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    }
+  },
+  "rules": {
+    "no-shadow": "off",
+    "react/require-default-props": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "markers": ["/"]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_" }
+    ],
+    "no-useless-constructor": "error",
+    "@typescript-eslint/no-useless-constructor": ["error"],
+    "import/no-extraneous-dependencies": "error",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "max-lines-per-function": ["error", 272],
+    "newline-before-return": "error",
+    "newline-after-var": "error",
+    "no-console": "error",
+    "comma-dangle": "off",
+    "no-plusplus": "off",
+    "no-template-curly-in-string": "error",
+    "no-trailing-spaces": "error",
+    "class-methods-use-this": "off",
+    "no-mixed-spaces-and-tabs": "error",
+    "no-underscore-dangle": "off",
+    "linebreak-style": "off",
+    "func-names": "off",
+    "no-unused-expressions": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
+    ],
+    "curly": "error",
+    "no-undef-init": "error",
+    "react/forbid-prop-types": "error",
+    "react/prop-types": "off",
+    "react/sort-comp": [
+      2,
+      {
+        "order": [
+          "instance-variables",
+          "static-variables",
+          "static-methods",
+          "lifecycle",
+          "everything-else",
+          "render"
+        ]
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".jsx", ".tsx", ".ts", ".js"]
+      }
+    ],
+    "import/no-import-module-exports": "off",
+    "jest/expect-expect": [
+      "error",
+      {
+        "assertFunctionNames": ["expect", "fc.assert", "it.each"]
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-no-useless-fragment": [
+      2,
+      {
+        "allowExpressions": true
+      }
+    ],
+    "react/jsx-wrap-multilines": "off",
+    "react/no-unstable-nested-components": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.spec.[jt]s?(x)"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": ["off"],
+        "import/no-extraneous-dependencies": ["off"],
+        "max-lines-per-function": "off",
+        "@typescript-eslint/camelcase": "off"
+      }
+    },
+    {
+      "files": ["**/*!(build).[jt]s"],
+      "rules": {
+        "global-require": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    },
+    {
+      "files": ["**/src/commands/*.[jt]s"],
+      "rules": {
+        "max-lines-per-function": "off"
+      }
+    },
+    {
+      "files": ["**/*.d.ts"],
+      "rules": {
+        "import/no-relative-packages": "off",
+        "react/no-unused-class-component-methods": "off"
+      }
+    },
+    {
+      "files": ["**/*.js"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/camelcase": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "jest/no-try-expect": "off",
+        "import/no-useless-path-segments": "off",
+        "react/jsx-curly-newline": "off",
+        "prefer-object-spread": "off",
+        "react/static-property-placement": "off",
+        "no-useless-catch": "off",
+        "max-classes-per-file": "off",
+        "react/state-in-constructor": "off",
+        "jest/expect-expect": "off",
+        "jest/no-standalone-expect": "off",
+        "import/named": "off",
+        "@typescript-eslint/no-this-alias": "off"
+      }
+    }
+  ]
+}
