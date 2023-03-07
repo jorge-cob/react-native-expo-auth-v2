@@ -14,6 +14,7 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
+import Button from '../components/google-button/button/Button'
 
 import GoogleButton from '../components/google-button/google-button.component'
 import { AuthNavigatorParamList } from '../navigation/AuthNavigator'
@@ -74,6 +75,11 @@ const SignUpScreen: React.FC<SignUpScreenProps> = (props) => {
           <TouchableOpacity style={styles.signButton} onPress={() => {}}>
             <Text>Sign Up</Text>
           </TouchableOpacity>
+          <Button 
+            onPress={() => {}}
+          >
+            Sign In
+          </Button>
 
           <View style={styles.form}>
             <GoogleButton onPress={() => {}} color="#707070">
@@ -95,7 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   form: {
     width: '86%',
@@ -109,15 +115,13 @@ const styles = StyleSheet.create({
     marginTop: 25.5
   },
   signButton: {
-    width: 80,
+    width: '86%',
     height: 38,
     marginTop: 10,
     backgroundColor: '#24A0ED',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
-    marginLeft: 25,
-    alignSelf: 'flex-start'
+    borderRadius: 5
   },
   switchInAndUpText: {
     fontWeight: '200',
