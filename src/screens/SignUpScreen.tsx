@@ -16,7 +16,6 @@ import {
 } from 'react-native'
 import Button from '../components/google-button/button/Button'
 
-import GoogleButton from '../components/google-button/google-button.component'
 import { AuthNavigatorParamList } from '../navigation/AuthNavigator'
 
 export const isAndroid = () => Platform.OS === 'android'
@@ -80,13 +79,6 @@ const SignUpScreen: React.FC<SignUpScreenProps> = (props) => {
           >
             Sign In
           </Button>
-
-          <View style={styles.form}>
-            <GoogleButton onPress={() => {}} color="#707070">
-              Continue with Google
-            </GoogleButton>
-          </View>
-
           <View style={{ marginTop: 10 }}>
             <Text style={styles.switchInAndUpText} onPress={() => props.navigation.push('SignIn')}>
               Already have an account?

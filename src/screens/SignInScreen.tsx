@@ -15,8 +15,6 @@ import {
 
 import { AuthNavigatorParamList } from '../navigation/AuthNavigator'
 
-import GoogleButton from '../components/google-button/google-button.component'
-
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -60,12 +58,6 @@ const SignInScreen: React.FC<SignInScreenProps> = (props) => {
           <TouchableOpacity style={styles.signButton} onPress={() => {}}>
             <Text>Sign In</Text>
           </TouchableOpacity>
-
-          <View style={styles.form}>
-            <GoogleButton onPress={() => {}} color="#707070">
-              Continue with Google
-            </GoogleButton>
-          </View>
 
           <View style={{ marginTop: 10 }}>
             <Text style={styles.switchInAndUpText} onPress={() => props.navigation.push('SignUp')}>
