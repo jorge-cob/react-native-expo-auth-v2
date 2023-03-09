@@ -20,7 +20,7 @@ const Button = ({ children, buttonType, disabled, style, textStyle, ...otherProp
     >
       {buttonType === 'google' && (
         <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={require('./google-logo.png')} />
+          <Image style={styles.logo} source={require('../../../assets/google-logo.png')} />
         </View>
       )}
       

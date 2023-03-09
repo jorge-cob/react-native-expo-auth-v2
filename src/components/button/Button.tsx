@@ -7,7 +7,7 @@ const Button: React.FC<ButtonProps>  = ({ children, buttonType, style, textStyle
     <TouchableOpacity {...otherProps} style={[styles.base, buttonType ? styles[buttonType] : null, style]}>
         {buttonType === 'google' && (
           <View style={styles.logoContainer}>
-            <Image style={styles.logo} source={require('./google-logo.png')} />
+            <Image style={styles.logo} source={require('../../../assets/google-logo.png')} />
           </View>
         )}
         <Text style={[ styles.baseText, buttonType === 'inverted' && styles.invertedText, textStyle]}>
