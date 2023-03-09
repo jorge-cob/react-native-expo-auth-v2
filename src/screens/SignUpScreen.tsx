@@ -10,11 +10,10 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native'
-import Button from '../components/google-button/button/Button'
+import Button from '../components/button/Button'
 
 import { AuthNavigatorParamList } from '../navigation/AuthNavigator'
 
@@ -70,14 +69,17 @@ const SignUpScreen: React.FC<SignUpScreenProps> = (props) => {
               onChangeText={(value) => setPassword(value)}
             />
           </View>
-
-          <TouchableOpacity style={styles.signButton} onPress={() => {}}>
-            <Text>Sign Up</Text>
-          </TouchableOpacity>
           <Button 
             onPress={() => {}}
           >
-            Sign In
+            Sign Up
+          </Button>
+
+          <Button 
+            onPress={() => {}}
+            buttonType='google'  
+          >
+            Sign up with Google
           </Button>
           <View style={{ marginTop: 10 }}>
             <Text style={styles.switchInAndUpText} onPress={() => props.navigation.push('SignIn')}>
@@ -105,15 +107,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingBottom: 1.5,
     marginTop: 25.5
-  },
-  signButton: {
-    width: '86%',
-    height: 38,
-    marginTop: 10,
-    backgroundColor: '#24A0ED',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5
   },
   switchInAndUpText: {
     fontWeight: '200',

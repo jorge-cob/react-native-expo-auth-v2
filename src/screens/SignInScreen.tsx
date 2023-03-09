@@ -12,6 +12,7 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
+import Button from '../components/button/Button'
 
 import { AuthNavigatorParamList } from '../navigation/AuthNavigator'
 
@@ -55,10 +56,17 @@ const SignInScreen: React.FC<SignInScreenProps> = (props) => {
             />
           </View>
 
-          <TouchableOpacity style={styles.signButton} onPress={() => {}}>
-            <Text>Sign In</Text>
-          </TouchableOpacity>
-
+          <Button 
+              onPress={() => {}}
+          >
+            Sign in
+          </Button>
+          <Button 
+            onPress={() => {}}
+            buttonType='google'  
+          >
+            Sign in with Google
+          </Button>
           <View style={{ marginTop: 10 }}>
             <Text style={styles.switchInAndUpText} onPress={() => props.navigation.push('SignUp')}>
               Don't have an Account?
