@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity, Text, Image, View } from 'react-native'
 import { ButtonProps } from './types';
 
 
-const Button: React.FC<ButtonProps>  = ({ children, buttonType, style, textStyle, ...otherProps }) => {
+const Button: React.FC<ButtonProps>  = ({ title, buttonType, style, textStyle, ...otherProps }) => {
   return (
     <TouchableOpacity {...otherProps} style={[styles.base, buttonType ? styles[buttonType] : null, style]}>
         {buttonType === 'google' && (
@@ -11,7 +11,7 @@ const Button: React.FC<ButtonProps>  = ({ children, buttonType, style, textStyle
           </View>
         )}
         <Text style={[ styles.baseText, buttonType === 'inverted' && styles.invertedText, textStyle]}>
-          {children}
+          {title}
         </Text>
     </TouchableOpacity>
   )

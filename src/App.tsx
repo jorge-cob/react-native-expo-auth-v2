@@ -1,21 +1,19 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { StatusBar } from 'expo-status-bar'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-import Colors from '../assets/constants/theme/colors'
-import DashboardWithValidation from './screens/DashboardWithValidation'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store/store';
 
-import HomeScreen from './screens/HomeScreen'
+import RootNavigation from './navigation/DashboardWithValidation'
+
 
 export default function App() {
-  const { system } = Colors
-
   return (
-    <NavigationContainer>
-      <StatusBar style="dark" backgroundColor={system} />
-      <SafeAreaProvider>
-        <DashboardWithValidation />
-      </SafeAreaProvider>
-    </NavigationContainer>
-  )
-}
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RootNavigation />
+      </PersistGate>
+    </Provider>
+  );
+};

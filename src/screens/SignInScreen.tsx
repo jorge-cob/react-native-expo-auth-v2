@@ -1,87 +1,100 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import * as WebBrowser from 'expo-web-browser'
+import { StackScreenProps } from '@react-navigation/stack';
 import { useState } from 'react'
+import * as WebBrowser from 'expo-web-browser'
 import {
-  Keyboard,
   KeyboardAvoidingView,
+  Platform,
   SafeAreaView,
   StyleSheet,
-  Text,
   TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View
+  View,
+  Text
 } from 'react-native'
 import Button from '../components/button/Button'
+import { signInAuthUserWithEmailAndPassword } from 'src/utils/firebase/firebase.utils';
+import LoadingScreen from './LoadingScreen';
 
-import { AuthNavigatorParamList } from '../navigation/AuthNavigator'
-
+export const isAndroid = () => Platform.OS === 'android'
 
 WebBrowser.maybeCompleteAuthSession()
 
-type SignInScreenProps = NativeStackScreenProps<AuthNavigatorParamList, 'SignIn'>
+const defaultFormFields = {
+  email: '',
+  password: '',
+};
 
-const SignInScreen: React.FC<SignInScreenProps> = (props) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
 
+const SignInScreen: React.FC<StackScreenProps<any>> = () => {
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [isLoading, setIsLoading] = useState(false);
+  const { email, password } = formFields;
+
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      setIsLoading(true);
+      await signInAuthUserWithEmailAndPassword(email, password);
+      resetFormFields();
+      setIsLoading(false);
+    } catch (error) {
+      alert('user sign in failed', error);
+    }
+  };
+
+  const handleChange = (name, value) => {
+    setFormFields({ ...formFields, [name]: value });
+  };
+
+  if(isLoading) { return <LoadingScreen /> }
+  
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss()
-      }}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              placeholderTextColor="#B1B1B1"
-              returnKeyType="next"
-              keyboardType="email-address"
-              textContentType="emailAddress"
-              value={email}
-              onChangeText={(value) => setEmail(value)}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              placeholderTextColor="#B1B1B1"
-              returnKeyType="done"
-              textContentType="newPassword"
-              secureTextEntry={true}
-              value={password}
-              onChangeText={(value) => setPassword(value)}
-            />
-          </View>
-
-          <Button 
-              onPress={() => {}}
-          >
-            Sign in
-          </Button>
-          <Button 
-            onPress={() => {}}
-            buttonType='google'  
-          >
-            Sign in with Google
-          </Button>
-          <View style={{ marginTop: 10 }}>
-            <Text style={styles.switchInAndUpText} onPress={() => props.navigation.push('SignUp')}>
-              Don't have an Account?
-            </Text>
-          </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+    <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor="#B1B1B1"
+            returnKeyType="next"
+            keyboardType="email-address"
+            textContentType="emailAddress"
+            value={email}
+            onChangeText={(value) => handleChange('email', value)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="#B1B1B1"
+            returnKeyType="done"
+            textContentType="newPassword"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(value) => handleChange('password', value)}
+          />
+        </View>
+        <Button 
+          onPress={handleSubmit}
+          title='Sign in'
+        /> 
+        <Button 
+          onPress={() => {}}
+          buttonType='google'  
+          title='Sign in with Google'
+        />
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   form: {
     width: '86%',
@@ -94,22 +107,17 @@ const styles = StyleSheet.create({
     paddingBottom: 1.5,
     marginTop: 25.5
   },
-  signButton: {
-    width: 80,
-    height: 38,
-    marginTop: 10,
-    backgroundColor: '#24A0ED',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    marginLeft: 25,
-    alignSelf: 'flex-start'
-  },
   switchInAndUpText: {
     fontWeight: '200',
     fontSize: 17,
     textAlign: 'center',
     textDecorationLine: 'underline'
+  },
+  error: {
+    marginTop: 10,
+    padding: 10,
+    color: '#fff',
+    backgroundColor: '#D54826FF',
   }
 })
 

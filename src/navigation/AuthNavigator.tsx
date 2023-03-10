@@ -1,8 +1,9 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import LoadingScreen from '../screens/LoadingScreen'
-import SignInScreen from '../screens/SignInScreen'
-import SignUpScreen from '../screens/SignUpScreen'
+import WelcomeScreen from '../screens/WelcomeScreen';
+import SignInScreen from '../screens/SignInScreen';
+import SignOutScreen from '../screens/SignUpScreen';
 
 export type AuthNavigatorParamList = {
   SignUp: undefined
@@ -10,16 +11,17 @@ export type AuthNavigatorParamList = {
   Loading: undefined
 }
 
-const Stack = createNativeStackNavigator<AuthNavigatorParamList>()
 
-const AuthNavigator = () => {
+const Stack = createStackNavigator();
+
+export default function AuthStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
-      <Stack.Screen name="SignIn" component={SignInScreen} />
-      <Stack.Screen name="Loading" component={LoadingScreen} />
-    </Stack.Navigator>
-  )
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Sign In" component={SignInScreen} />
+        <Stack.Screen name="Sign Up" component={SignOutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
-
-export default AuthNavigator

@@ -1,22 +1,29 @@
-import React from 'react'
-import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import Button from 'src/components/button/Button';
+import { selectCurrentUser } from 'src/store/user/user.selector';
+import { signOutUser } from '../utils/firebase/firebase.utils';
 
-const HomeScreen = () => {
+export default function HomeScreen() {
+  const currentUser = useSelector(selectCurrentUser);
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <Text>Homepage</Text>
-        <Button title="Log Off" onPress={() => {}} />
-      </View>
-    </SafeAreaView>
-  )
+    <View style={styles.container}>
+      <Text>Welcome {currentUser?.email}!</Text>
+      <Button title="Sign Out" style={styles.button} onPress={signOutUser} />
+    </View>
+  );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+  },
+  button: {
+    marginTop: 10
   }
-})
-
-export default HomeScreen
+});

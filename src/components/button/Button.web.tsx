@@ -3,7 +3,7 @@ import { ButtonProps } from './types';
 
 type CallbackWithHovered = PressableStateCallbackType & { hovered?: boolean, focused?: boolean }
 
-const Button = ({ children, buttonType, disabled, style, textStyle, ...otherProps }: ButtonProps) => {
+const Button = ({ title, buttonType, disabled, style, textStyle, ...otherProps }: ButtonProps) => {
   return (
     <Pressable
       accessibilityRole="button"
@@ -25,7 +25,7 @@ const Button = ({ children, buttonType, disabled, style, textStyle, ...otherProp
       )}
       
       <Text style={[styles.text, buttonType && { color: 'white' }, disabled && styles.disabledText, textStyle]}>
-        {children}
+        {title}
       </Text>
     </Pressable>
   )
