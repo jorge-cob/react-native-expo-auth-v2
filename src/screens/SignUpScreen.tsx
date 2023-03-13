@@ -9,7 +9,7 @@ import {
   TextInput,
   View
 } from 'react-native'
-import { auth, createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from 'src/utils/firebase/firebase.utils';
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from 'src/utils/firebase/firebase.utils';
 import Button from '../components/button/Button'
 import LoadingScreen from './LoadingScreen';
 
@@ -117,11 +117,6 @@ const SignUpScreen: React.FC<StackScreenProps<any>> = () => {
           onPress={handleSubmit}
           title='Sign up'
         /> 
-        <Button 
-          onPress={() => {}}
-          buttonType='google'  
-          title='Sign up with Google'
-        />
       </KeyboardAvoidingView>
     </SafeAreaView>
   )

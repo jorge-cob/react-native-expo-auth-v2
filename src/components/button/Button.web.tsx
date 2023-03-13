@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Pressable, PressableStateCallbackType, View, Image } from 'react-native'
+import { StyleSheet, Text, Pressable, PressableStateCallbackType } from 'react-native'
 import { ButtonProps } from './types';
 
 type CallbackWithHovered = PressableStateCallbackType & { hovered?: boolean, focused?: boolean }
@@ -18,12 +18,6 @@ const Button = ({ title, buttonType, disabled, style, textStyle, ...otherProps }
       ]}
       {...otherProps} 
     >
-      {buttonType === 'google' && (
-        <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={require('../../../assets/google-logo.png')} />
-        </View>
-      )}
-      
       <Text style={[styles.text, buttonType && { color: 'white' }, disabled && styles.disabledText, textStyle]}>
         {title}
       </Text>
@@ -65,10 +59,6 @@ const styles = StyleSheet.create({
   inverted: {
     backgroundColor: 'black',
     border: '1px solid black',
-  },
-  google: {
-    backgroundColor: '#4285f4',
-    paddingLeft: 1
   },
   text: {
     letterSpacing: 0.5,
