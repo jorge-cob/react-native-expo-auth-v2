@@ -10,7 +10,7 @@ import {
 import { setCurrentUser } from '../store/user/user.action';
 import { selectCurrentUser } from '../store/user/user.selector';
 
-export default function RootNavigation() {
+export default function DashboardWithValidation() { 
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +19,9 @@ export default function RootNavigation() {
         createUserDocumentFromAuth(user);
       }
       dispatch(setCurrentUser(user));
+
     });
+    
 
     return unsubscribe;
   }, []);

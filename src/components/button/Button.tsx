@@ -1,18 +1,13 @@
-import { StyleSheet, TouchableOpacity, Text, Image, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, Text } from 'react-native'
 import { ButtonProps } from './types';
 
 
 const Button: React.FC<ButtonProps>  = ({ title, buttonType, style, textStyle, ...otherProps }) => {
   return (
     <TouchableOpacity {...otherProps} style={[styles.base, buttonType ? styles[buttonType] : null, style]}>
-        {buttonType === 'google' && (
-          <View style={styles.logoContainer}>
-            <Image style={styles.logo} source={require('../../../assets/google-logo.png')} />
-          </View>
-        )}
-        <Text style={[ styles.baseText, buttonType === 'inverted' && styles.invertedText, textStyle]}>
-          {title}
-        </Text>
+      <Text style={[ styles.baseText, buttonType === 'inverted' && styles.invertedText, textStyle]}>
+        {title}
+      </Text>
     </TouchableOpacity>
   )
 }
@@ -51,10 +46,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black'
   },
-  google: {
-    backgroundColor: '#4285f4',
-    paddingLeft: 1
-  },
   baseText: {
     letterSpacing: 0.5,
     fontWeight: 'bold',
@@ -63,5 +54,4 @@ const styles = StyleSheet.create({
   invertedText: {
     color: 'black'
   }
-
 })

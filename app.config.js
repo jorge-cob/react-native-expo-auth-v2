@@ -29,6 +29,7 @@ export default {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
+      androidClientId: process.env.ANDROID_CLIENT_ID,
       firebaseApiKey: process.env.FIREBASE_API_KEY,
       firebaseAuthDomain: process.env.FIREBASE_AUTH_DOMAIN,
       firebaseProjectId: process.env.FIREBASE_PROJECT_ID,

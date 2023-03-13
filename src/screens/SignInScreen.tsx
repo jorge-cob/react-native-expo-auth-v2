@@ -1,6 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import { useState } from 'react'
+import {  useState } from 'react'
 import * as WebBrowser from 'expo-web-browser'
+
 import {
   KeyboardAvoidingView,
   Platform,
@@ -13,6 +14,7 @@ import {
 import Button from '../components/button/Button'
 import { signInAuthUserWithEmailAndPassword } from 'src/utils/firebase/firebase.utils';
 import LoadingScreen from './LoadingScreen';
+import Constants from 'expo-constants';
 
 export const isAndroid = () => Platform.OS === 'android'
 
@@ -25,6 +27,9 @@ const defaultFormFields = {
 
 
 const SignInScreen: React.FC<StackScreenProps<any>> = () => {
+
+  const androidClientId = Constants.manifest?.extra?.androidClientId
+  console.log('androidClientId', androidClientId);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [isLoading, setIsLoading] = useState(false);
   const { email, password } = formFields;
@@ -50,6 +55,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  
   if(isLoading) { return <LoadingScreen /> }
   
   return (
@@ -81,11 +87,6 @@ const SignInScreen: React.FC<StackScreenProps<any>> = () => {
           onPress={handleSubmit}
           title='Sign in'
         /> 
-        <Button 
-          onPress={() => {}}
-          buttonType='google'  
-          title='Sign in with Google'
-        />
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
