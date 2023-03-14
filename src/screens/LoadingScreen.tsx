@@ -1,5 +1,6 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 
+
 const LoadingScreen = () => {
   return (
     <View style={styles.container}>
@@ -14,4 +15,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
+
 export default LoadingScreen

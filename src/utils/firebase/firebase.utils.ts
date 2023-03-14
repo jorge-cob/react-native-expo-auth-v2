@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from 'firebase/app'
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -7,15 +7,15 @@ import {
   onAuthStateChanged,
   NextOrObserver,
   User
-} from 'firebase/auth';
+} from 'firebase/auth'
 import {
   getFirestore,
   doc,
   getDoc,
   setDoc,
   QueryDocumentSnapshot
-} from 'firebase/firestore';
-import Constants from 'expo-constants';
+} from 'firebase/firestore'
+import Constants from 'expo-constants'
 
 
 const firebaseConfig = {
@@ -25,39 +25,38 @@ const firebaseConfig = {
   storageBucket: Constants.manifest?.extra?.firebaseStorageBucket,
   messagingSenderId: Constants.manifest?.extra?.firebaseMessagingSenderId,
   appId: Constants.manifest?.extra?.firebaseAppId,
-};
+}
 
-const firebaseApp = initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig)
 
 
-export const auth = getAuth();
+export const auth = getAuth()
 
-export const db = getFirestore();
-
+export const db = getFirestore()
 
 export type AdditionalInformation = {
-  displayName?: string;
-};
+  displayName?: string
+}
 
 export type UserData = {
-  createdAt: Date;
-  displayName: string;
-  email: string;
-};
+  createdAt: Date
+  displayName: string
+  email: string
+}
 
 export const createUserDocumentFromAuth = async (
-  userAuth: User,
+  userAuth: User | undefined,
   additionalInformation = {} as AdditionalInformation
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
-  if (!userAuth) return;
+  if (!userAuth) return
 
-  const userDocRef = doc(db, 'users', userAuth.uid);
+  const userDocRef = doc(db, 'users', userAuth.uid)
 
-  const userSnapshot = await getDoc(userDocRef);
+  const userSnapshot = await getDoc(userDocRef)
 
   if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
-    const createdAt = new Date();
+    const { displayName, email } = userAuth
+    const createdAt = new Date()
 
     try {
       await setDoc(userDocRef, {
@@ -65,31 +64,29 @@ export const createUserDocumentFromAuth = async (
         email,
         createdAt,
         ...additionalInformation,
-      });
+      })
     } catch (error) {
-      console.log('error creating the user', error);
+      console.log('error creating the user', error)
     }
   }
-  return userSnapshot as QueryDocumentSnapshot<UserData>;
+  return userSnapshot as QueryDocumentSnapshot<UserData>
 };
 
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
   password: string
-) => {  if (!email || !password) return;
-
-  return await createUserWithEmailAndPassword(auth, email, password);
-};
+) => { 
+  return await createUserWithEmailAndPassword(auth, email, password)
+}
 
 export const signInAuthUserWithEmailAndPassword = async (
   email: string,
   password: string
-) => {  if (!email || !password) return;
+) => {  if (!email || !password) return
+  return await signInWithEmailAndPassword(auth, email, password)
+}
 
-  return await signInWithEmailAndPassword(auth, email, password);
-};
-
-export const signOutUser = async () => await signOut(auth);
+export const signOutUser = async () => await signOut(auth)
 
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
-  onAuthStateChanged(auth, callback);
+  onAuthStateChanged(auth, callback)

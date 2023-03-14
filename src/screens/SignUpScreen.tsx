@@ -1,19 +1,20 @@
-import { StackScreenProps } from '@react-navigation/stack';
+import { StackScreenProps } from '@react-navigation/stack'
 import * as WebBrowser from 'expo-web-browser'
 import { useState } from 'react'
+import { FirebaseError } from '@firebase/util'
+
 import {
   KeyboardAvoidingView,
-  Platform,
   SafeAreaView,
   StyleSheet,
   TextInput,
   View
 } from 'react-native'
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from 'src/utils/firebase/firebase.utils';
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from 'src/utils/firebase/firebase.utils'
 import Button from '../components/button/Button'
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from './LoadingScreen'
+import { UserCredential } from 'firebase/auth'
 
-export const isAndroid = () => Platform.OS === 'android'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -22,52 +23,54 @@ const defaultFormFields = {
   email: '',
   password: '',
   confirmPassword: '',
-};
-
+}
 
 const SignUpScreen: React.FC<StackScreenProps<any>> = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
-  const [isLoading, setIsLoading] = useState(false);
-  const { displayName, email, password, confirmPassword } = formFields;
+  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [isLoading, setIsLoading] = useState(false)
+  const { displayName, email, password, confirmPassword } = formFields
 
   const resetFormFields = () => {
-    setFormFields(defaultFormFields);
+    setFormFields(defaultFormFields)
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
 
-    if (password !== confirmPassword) {
-      alert('passwords do not match');
-      return;
+    if(!password || !confirmPassword) {
+      alert('Please enter password')
+      return
+    }
+    if(password !== confirmPassword) {
+      alert('Passwords do not match')
+      return
+    }
+
+    if(!email || !displayName) {
+      alert('Please enter email and display name')
+      return
     }
 
     try {
       setIsLoading(true);
-      const { user } = await createAuthUserWithEmailAndPassword(
+      const { user }: UserCredential = await createAuthUserWithEmailAndPassword(
         email,
         password
-      );
-
-      await createUserDocumentFromAuth(user, { displayName });
+      )
+      await createUserDocumentFromAuth(user, { displayName })
       resetFormFields();
       setIsLoading(false);
-    } catch (error) {
-      console.log('error', error);
-      if (error.code === 'auth/email-already-in-use') {
-        alert('Cannot create user, email already in use');
-      } else {
-        alert('user creation encountered an error', error);
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError) {
+        console.error(error.code)
       }
     }
-  };
+  }
 
-  const handleChange = (name, value) => {
-    setFormFields({ ...formFields, [name]: value });
-  };
+  const handleChange = (name: string, value: string) => {
+    setFormFields({ ...formFields, [name]: value })
+  }
 
   if(isLoading) { return <LoadingScreen /> }
-  
    
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -121,6 +124,7 @@ const SignUpScreen: React.FC<StackScreenProps<any>> = () => {
     </SafeAreaView>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

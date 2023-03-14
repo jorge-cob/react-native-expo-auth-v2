@@ -1,9 +1,9 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
-import WelcomeScreen from '../screens/WelcomeScreen';
-import SignInScreen from '../screens/SignInScreen';
-import SignOutScreen from '../screens/SignUpScreen';
+import WelcomeScreen from '../screens/WelcomeScreen'
+import SignInScreen from '../screens/SignInScreen'
+import SignOutScreen from '../screens/SignUpScreen'
 
 export type AuthNavigatorParamList = {
   SignUp: undefined
@@ -12,7 +12,7 @@ export type AuthNavigatorParamList = {
 }
 
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 export default function AuthStack() {
   return (
@@ -23,5 +23,5 @@ export default function AuthStack() {
         <Stack.Screen name="Sign Up" component={SignOutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, Pressable, PressableStateCallbackType } from 'react-native'
-import { ButtonProps } from './types';
+import { ButtonProps } from './types'
 
 type CallbackWithHovered = PressableStateCallbackType & { hovered?: boolean, focused?: boolean }
 
@@ -23,9 +23,9 @@ const Button = ({ title, buttonType, disabled, style, textStyle, ...otherProps }
       </Text>
     </Pressable>
   )
-};
+}
 
-export default Button;
+export default Button
 
 const styles = StyleSheet.create({
   logoContainer: {

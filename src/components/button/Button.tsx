@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity, Text } from 'react-native'
-import { ButtonProps } from './types';
+import { ButtonProps } from './types'
 
 
 const Button: React.FC<ButtonProps>  = ({ title, buttonType, style, textStyle, ...otherProps }) => {
@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps>  = ({ title, buttonType, style, textStyle, .
   )
 }
 
-export default Button;
+export default Button
 
 const styles = StyleSheet.create({
   logoContainer: {

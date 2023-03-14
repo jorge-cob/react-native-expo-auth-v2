@@ -1,6 +1,7 @@
-import { StackScreenProps } from '@react-navigation/stack';
-import {  useState } from 'react'
+import { StackScreenProps } from '@react-navigation/stack'
+import { useState } from 'react'
 import * as WebBrowser from 'expo-web-browser'
+import { FirebaseError } from '@firebase/util'
 
 import {
   KeyboardAvoidingView,
@@ -8,54 +9,49 @@ import {
   SafeAreaView,
   StyleSheet,
   TextInput,
-  View,
-  Text
+  View
 } from 'react-native'
 import Button from '../components/button/Button'
-import { signInAuthUserWithEmailAndPassword } from 'src/utils/firebase/firebase.utils';
-import LoadingScreen from './LoadingScreen';
-import Constants from 'expo-constants';
+import { signInAuthUserWithEmailAndPassword } from 'src/utils/firebase/firebase.utils'
+import LoadingScreen from './LoadingScreen'
+import Constants from 'expo-constants'
 
 export const isAndroid = () => Platform.OS === 'android'
+
 
 WebBrowser.maybeCompleteAuthSession()
 
 const defaultFormFields = {
   email: '',
   password: '',
-};
-
+}
 
 const SignInScreen: React.FC<StackScreenProps<any>> = () => {
-
-  const androidClientId = Constants.manifest?.extra?.androidClientId
-  console.log('androidClientId', androidClientId);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [isLoading, setIsLoading] = useState(false);
   const { email, password } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
-  };
+  }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleSubmit = async () => {
     try {
       setIsLoading(true);
       await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
       setIsLoading(false);
-    } catch (error) {
-      alert('user sign in failed', error);
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError) {
+        console.error(error.code)
+     }
     }
-  };
+  }
 
-  const handleChange = (name, value) => {
+  const handleChange = (name: string, value: string) => {
     setFormFields({ ...formFields, [name]: value });
-  };
+  }
 
-  
   if(isLoading) { return <LoadingScreen /> }
   
   return (
@@ -91,6 +87,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = () => {
     </SafeAreaView>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

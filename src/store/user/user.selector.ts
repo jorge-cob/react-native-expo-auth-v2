@@ -1,4 +1,10 @@
-import { RootState } from '../store';
-import { UserState } from './user.reducer';
+import { RootState } from '../store'
+import { UserState } from './user.reducer'
+import { createSelector } from 'reselect'
 
-export const selectCurrentUser = (state: RootState): UserState => state.user.currentUser;
+export const selectUserReducer = (state: RootState): UserState => state.user
+
+export const selectCurrentUser = createSelector(
+  selectUserReducer,
+  (user) => user.currentUser
+)
