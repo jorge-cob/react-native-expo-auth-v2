@@ -1,15 +1,13 @@
-# react-native-expo-auth
-## React native expo auth boilerplate
+# React Native with steroids app template 
+## Expo - Typescript - Firebase auth -  Redux - React Native Web 
 
-
-Template for react-native projects in need of firebase related authentication. 
 
 This is the second iteration of a project I started 2 years ago ( https://github.com/jorge-cob/react-native-expo-auth ) which has its own repository due to the significant changes in the project's structure and libraries that are to be used.
 
 
 ## Features
 
-- Sign in or sign up into your app using email and password or Google sign in (other firebase supported authentication methods may be implemented) and navigate between screens.
+- Sign in or sign up into your app using email and password (other firebase supported authentication methods may be implemented) and navigate between screens.
 
 ## Tech
 
@@ -20,6 +18,15 @@ Cloud Task Manager uses a number of open source projects to work properly:
 - [Firebase](https://firebase.google.com/) - Storage and database management.
 - [React Redux](https://react-redux.js.org/) - State container.
 
+## Configuration
+ - Create a .env in your project's root and add the following lines for Firebase config:
+``` FIREBASE_API_KEY=<Your firebase api key>
+    FIREBASE_AUTH_DOMAIN=<Your firebase auth domain>
+    FIREBASE_PROJECT_ID=<Your firebase project id>
+    FIREBASE_STORAGE_BUCKET=<Your firebase storage bucket>
+    FIREBASE_MESSAGING_SENDER_ID=<Your firebase message sender id>
+    FIREBASE_APP_ID=<Your firebase app id>
+```
 
 
 ## Pre-requisites
