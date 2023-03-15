@@ -8,19 +8,19 @@ import SignOutScreen from '../screens/SignUpScreen'
 export type AuthNavigatorParamList = {
   SignUp: undefined
   SignIn: undefined
-  Loading: undefined
+  Welcome: undefined
 }
 
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator<AuthNavigatorParamList>()
 
 export default function AuthStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Sign In" component={SignInScreen} />
-        <Stack.Screen name="Sign Up" component={SignOutScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="SignUp" component={SignOutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

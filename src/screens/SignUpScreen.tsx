@@ -14,6 +14,7 @@ import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '
 import Button from '../components/button/Button'
 import LoadingScreen from './LoadingScreen'
 import { UserCredential } from 'firebase/auth'
+import { AuthNavigatorParamList } from 'src/navigation/AuthNavigator'
 
 
 WebBrowser.maybeCompleteAuthSession()
@@ -25,7 +26,10 @@ const defaultFormFields = {
   confirmPassword: '',
 }
 
-const SignUpScreen: React.FC<StackScreenProps<any>> = () => {
+type Props = StackScreenProps<AuthNavigatorParamList, 'SignUp'>
+
+
+const SignUpScreen: React.FC<Props> = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
   const [isLoading, setIsLoading] = useState(false)
   const { displayName, email, password, confirmPassword } = formFields

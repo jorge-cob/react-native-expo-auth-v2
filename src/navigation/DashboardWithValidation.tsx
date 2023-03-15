@@ -11,7 +11,7 @@ import { setCurrentUser } from '../store/user/user.action'
 import { selectCurrentUser } from '../store/user/user.selector'
 
 
-export default function DashboardWithValidation() { 
+export default function DashboardWithValidation(): React.ReactElement { 
   const dispatch = useDispatch()
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import { selectCurrentUser } from 'src/store/user/user.selector'
 import { signOutUser } from '../utils/firebase/firebase.utils'
 
 
-export default function HomeScreen() {
+export default function HomeScreen(): React.ReactElement {
   const currentUser = useSelector(selectCurrentUser)
 
   return (

@@ -14,10 +14,12 @@ import {
 import Button from '../components/button/Button'
 import { signInAuthUserWithEmailAndPassword } from 'src/utils/firebase/firebase.utils'
 import LoadingScreen from './LoadingScreen'
-import Constants from 'expo-constants'
+import { AuthNavigatorParamList } from 'src/navigation/AuthNavigator'
+
 
 export const isAndroid = () => Platform.OS === 'android'
 
+type Props = StackScreenProps<AuthNavigatorParamList, 'SignIn'>
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -26,21 +28,21 @@ const defaultFormFields = {
   password: '',
 }
 
-const SignInScreen: React.FC<StackScreenProps<any>> = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
-  const [isLoading, setIsLoading] = useState(false);
-  const { email, password } = formFields;
+const SignInScreen: React.FC<Props> = () => {
+  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [isLoading, setIsLoading] = useState(false)
+  const { email, password } = formFields
 
   const resetFormFields = () => {
-    setFormFields(defaultFormFields);
+    setFormFields(defaultFormFields)
   }
 
   const handleSubmit = async () => {
     try {
-      setIsLoading(true);
-      await signInAuthUserWithEmailAndPassword(email, password);
-      resetFormFields();
-      setIsLoading(false);
+      setIsLoading(true)
+      await signInAuthUserWithEmailAndPassword(email, password)
+      resetFormFields()
+      setIsLoading(false)
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         console.error(error.code)
@@ -49,7 +51,7 @@ const SignInScreen: React.FC<StackScreenProps<any>> = () => {
   }
 
   const handleChange = (name: string, value: string) => {
-    setFormFields({ ...formFields, [name]: value });
+    setFormFields({ ...formFields, [name]: value })
   }
 
   if(isLoading) { return <LoadingScreen /> }

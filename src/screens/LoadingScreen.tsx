@@ -1,7 +1,7 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 
 
-const LoadingScreen = () => {
+function LoadingScreen(): React.ReactElement {
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" />
