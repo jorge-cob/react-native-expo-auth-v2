@@ -1,5 +1,3 @@
-import { FirebaseRemoteConfigTypes } from '@react-native-firebase/remote-config'
-
 jest.mock("@react-native-async-storage/async-storage", () =>
     require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
 )
@@ -45,5 +43,5 @@ jest.mock('redux-persist', () => {
     persistReducer: jest
       .fn()
       .mockImplementation((config, reducers) => reducers),
-  };
-});
+  }
+})
