@@ -1,7 +1,9 @@
-import { USER_ACTION_TYPES } from './user.types'
-import { ActionWithPayload, createAction } from '../../utils/reducer/reducer.utils'
 import { User } from 'firebase/auth'
-import { Maybe } from 'assets/types/Map'
+
+import { USER_ACTION_TYPES } from './user.types'
+
+import { ActionWithPayload, createAction } from '../../utils/reducer/reducer.utils'
+import { Maybe } from '../../../assets/types/Map'
 
 
 export type SetCurrentUser = ActionWithPayload<

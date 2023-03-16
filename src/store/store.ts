@@ -1,7 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { compose, createStore, applyMiddleware, Middleware } from 'redux'
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist'
 import logger from 'redux-logger'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { rootReducer } from './root-reducer'
 
 

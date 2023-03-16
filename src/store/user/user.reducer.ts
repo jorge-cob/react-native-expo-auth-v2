@@ -1,5 +1,7 @@
 import { AnyAction } from 'redux'
+
 import { USER_ACTION_TYPES } from './user.types'
+
 import { UserData } from '../../utils/firebase/firebase.utils'
 
 

@@ -1,15 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
+import { AuthNavigatorParamList } from './types'
+
 import WelcomeScreen from '../screens/WelcomeScreen'
 import SignInScreen from '../screens/SignInScreen'
 import SignOutScreen from '../screens/SignUpScreen'
-
-export type AuthNavigatorParamList = {
-  SignUp: undefined
-  SignIn: undefined
-  Welcome: undefined
-}
 
 
 const Stack = createStackNavigator<AuthNavigatorParamList>()

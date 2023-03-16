@@ -1,8 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import * as WebBrowser from 'expo-web-browser'
-import { useState } from 'react'
 import { FirebaseError } from '@firebase/util'
-
+import { useState } from 'react'
 import {
   KeyboardAvoidingView,
   SafeAreaView,
@@ -10,16 +8,20 @@ import {
   TextInput,
   View
 } from 'react-native'
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from 'src/utils/firebase/firebase.utils'
-import Button from '../components/button/Button'
-import LoadingScreen from './LoadingScreen'
+import * as WebBrowser from 'expo-web-browser'
 import { UserCredential } from 'firebase/auth'
-import { AuthNavigatorParamList } from 'src/navigation/AuthNavigator'
+
+import LoadingScreen from './LoadingScreen'
+import { SignUpProps } from './types'
+
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../utils/firebase/firebase.utils'
+import Button from '../components/button/Button'
+import { AuthNavigatorParamList } from '../navigation/types'
 
 
 WebBrowser.maybeCompleteAuthSession()
 
-const defaultFormFields = {
+const INITIAL_FORM_FIELD_STATE = {
   displayName: '',
   email: '',
   password: '',
@@ -28,17 +30,16 @@ const defaultFormFields = {
 
 type Props = StackScreenProps<AuthNavigatorParamList, 'SignUp'>
 
-
 const SignUpScreen: React.FC<Props> = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [formFields, setFormFields] = useState<SignUpProps>(INITIAL_FORM_FIELD_STATE)
   const [isLoading, setIsLoading] = useState(false)
   const { displayName, email, password, confirmPassword } = formFields
 
   const resetFormFields = () => {
-    setFormFields(defaultFormFields)
+    setFormFields(INITIAL_FORM_FIELD_STATE)
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit: () => void = async () => {
 
     if(!password || !confirmPassword) {
       alert('Please enter password')
@@ -70,7 +71,7 @@ const SignUpScreen: React.FC<Props> = () => {
     }
   }
 
-  const handleChange = (name: string, value: string) => {
+  const handleChange = (name: string, value: string): void => {
     setFormFields({ ...formFields, [name]: value })
   }
 

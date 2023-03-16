@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
-import Button from 'src/components/button/Button'
-import { selectCurrentUser } from 'src/store/user/user.selector'
+
+import Button from '../components/button/Button'
+import { selectCurrentUser } from '../store/user/user.selector'
 import { signOutUser } from '../utils/firebase/firebase.utils'
 
 

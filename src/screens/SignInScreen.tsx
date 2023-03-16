@@ -1,40 +1,39 @@
+import { FirebaseError } from '@firebase/util'
 import { StackScreenProps } from '@react-navigation/stack'
 import { useState } from 'react'
-import * as WebBrowser from 'expo-web-browser'
-import { FirebaseError } from '@firebase/util'
-
 import {
   KeyboardAvoidingView,
-  Platform,
   SafeAreaView,
   StyleSheet,
   TextInput,
   View
 } from 'react-native'
-import Button from '../components/button/Button'
-import { signInAuthUserWithEmailAndPassword } from 'src/utils/firebase/firebase.utils'
+import * as WebBrowser from 'expo-web-browser'
+
 import LoadingScreen from './LoadingScreen'
-import { AuthNavigatorParamList } from 'src/navigation/AuthNavigator'
+import { SignInProps } from './types'
 
+import Button from '../components/button/Button'
+import { signInAuthUserWithEmailAndPassword } from '../utils/firebase/firebase.utils'
+import { AuthNavigatorParamList } from '../navigation/types'
 
-export const isAndroid = () => Platform.OS === 'android'
 
 type Props = StackScreenProps<AuthNavigatorParamList, 'SignIn'>
 
 WebBrowser.maybeCompleteAuthSession()
 
-const defaultFormFields = {
+const INITIAL_FORM_FIELD_STATE = {
   email: '',
-  password: '',
+  password: ''
 }
 
 const SignInScreen: React.FC<Props> = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields)
+  const [formFields, setFormFields] = useState<SignInProps>(INITIAL_FORM_FIELD_STATE)
   const [isLoading, setIsLoading] = useState(false)
   const { email, password } = formFields
 
   const resetFormFields = () => {
-    setFormFields(defaultFormFields)
+    setFormFields(INITIAL_FORM_FIELD_STATE)
   }
 
   const handleSubmit = async () => {
