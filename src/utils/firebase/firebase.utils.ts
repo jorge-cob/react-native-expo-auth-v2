@@ -6,7 +6,8 @@ import {
   signOut,
   onAuthStateChanged,
   NextOrObserver,
-  User
+  User,
+  UserCredential
 } from 'firebase/auth'
 import {
   getFirestore,
@@ -75,18 +76,19 @@ export const createUserDocumentFromAuth = async (
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
   password: string
-) => { 
+): Promise<UserCredential> => { 
   return await createUserWithEmailAndPassword(auth, email, password)
 }
 
 export const signInAuthUserWithEmailAndPassword = async (
   email: string,
   password: string
-) => {  if (!email || !password) return
+): Promise<UserCredential | void> => {  
+  if (!email || !password) return
   return await signInWithEmailAndPassword(auth, email, password)
 }
 
-export const signOutUser = async () => await signOut(auth)
+export const signOutUser: () => void = async () => await signOut(auth)
 
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
   onAuthStateChanged(auth, callback)
